@@ -4,11 +4,11 @@
 // around ~14.2s (the choke gauge forces breathing breaks), so the top rank sits
 // just above that floor. A skilled human realistically lands ~18-25s.
 const LADDER = [
-  { max: 16500, rank: 'LÉGENDE VIVANTE', emoji: '🏆', blurb: 'Quasi-parfait. On parlera de toi pendant 15 ans.' },
-  { max: 20000, rank: 'Const', emoji: '🥃', blurb: 'Le maître absolu de la gorgée.' },
-  { max: 24000, rank: 'Meuss', emoji: '😎', blurb: 'Technique impeccable, foie en béton.' },
-  { max: 29000, rank: 'Bon vivant', emoji: '🍻', blurb: 'Tu tiens bien la Suze, respect.' },
-  { max: 38000, rank: 'Petit joueur', emoji: '🙂', blurb: 'Pas mal, mais la légende est loin.' },
+  { max: 13800, rank: 'Légende vivante', emoji: '🏆', blurb: 'Quasi-parfait. On parlera de toi pendant 15 ans.' },
+  { max: 14000, rank: 'Soiffard', emoji: '🥃', blurb: 'Le maître absolu de la gorgée.' },
+  { max: 14600, rank: 'Petit soiffard', emoji: '😎', blurb: 'Technique impeccable, foie en béton.' },
+  { max: 15000, rank: 'Bon vivant', emoji: '🍻', blurb: 'Tu tiens bien la Suze, respect.' },
+  { max: 16000, rank: 'Petit joueur', emoji: '🙂', blurb: 'Pas mal, mais la légende est loin.' },
   { max: Infinity, rank: 'Sobre comme un chameau', emoji: '🐫', blurb: 'Tu as pris ton temps… trop ton temps.' },
 ]
 

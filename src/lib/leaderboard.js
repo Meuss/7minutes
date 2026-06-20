@@ -14,9 +14,9 @@ export async function fetchScores() {
     if (!res.ok) throw new Error('bad status')
     const data = await res.json()
     const scores = Array.isArray(data) ? data : data.scores || []
-    return scores
-      .filter((s) => typeof s.timeMs === 'number')
-      .sort((a, b) => a.timeMs - b.timeMs)
+    return bestPerPseudo(
+      scores.filter((s) => typeof s.timeMs === 'number').sort((a, b) => a.timeMs - b.timeMs)
+    )
   } catch {
     return loadLocal()
   }
@@ -40,10 +40,22 @@ export async function submitScore({ pseudo, timeMs, verdict }) {
   }
 }
 
+// Keep only each pseudo's best (lowest) time. Expects an ascending-sorted list,
+// so the first occurrence of a pseudo is its best. Case-insensitive, trimmed.
+function bestPerPseudo(scores) {
+  const seen = new Set()
+  return scores.filter((s) => {
+    const key = (s.pseudo || 'Anonyme').trim().toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
 function loadLocal() {
   try {
     const v = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]')
-    return v.sort((a, b) => a.timeMs - b.timeMs)
+    return bestPerPseudo(v.sort((a, b) => a.timeMs - b.timeMs))
   } catch {
     return []
   }

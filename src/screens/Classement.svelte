@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { goto, startGame, RESERVED_LEGEND } from '../lib/state.svelte.js'
   import { fetchScores } from '../lib/leaderboard.js'
-  import { formatTime } from '../lib/verdicts.js'
+  import { formatTime, verdictFor } from '../lib/verdicts.js'
 
   let loading = $state(true)
   let scores = $state([])
@@ -22,7 +22,7 @@
     <span></span>
   </div>
 
-  <div class="kicker" style="margin-top:40px">— Hall of Fame —</div>
+  <div class="kicker" style="margin-top:40px">— Meilleurs scores —</div>
   <h1 class="title-neon" style="font-size:30px;margin:4px 0 14px">CLASSEMENT</h1>
 
   <div class="board">
@@ -40,11 +40,12 @@
       <div class="info">Personne n’a encore osé. Sois le premier ! 🍶</div>
     {:else}
       {#each scores.slice(0, 30) as s, i}
+        {@const rank = verdictFor(s.timeMs)?.rank}
         <div class="entry" class:me={s.pseudo === myPseudo && myPseudo}>
           <span class="pos">{i + 2}</span>
           <span class="name">{s.pseudo || 'Anonyme'}</span>
           <span class="t">{formatTime(s.timeMs)}</span>
-          {#if s.verdict}<span class="tag soft">{s.verdict}</span>{/if}
+          {#if rank}<span class="tag soft">{rank}</span>{/if}
         </div>
       {/each}
     {/if}
